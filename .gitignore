@@ -1,0 +1,46 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+**/dist/
+**/build/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.*
+.env.local
+
+# TypeScript
+lib/
+out/
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
+
+# Misc
+*.local
+debug.log
