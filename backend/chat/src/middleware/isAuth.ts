@@ -11,7 +11,7 @@ export interface AuthenticatedRequest extends Request {
     user? : IUser | null;
 }
 
-export const isAuth = async (req : AuthenticatedRequest, res : Response, next : NextFunction) => {
+export const isAuth = async (req : Request, res : Response, next : NextFunction) => {
     try{
         const authHeader = req.headers.authorization;
         if(!authHeader || !authHeader.startsWith("Bearer ")){
@@ -32,7 +32,7 @@ export const isAuth = async (req : AuthenticatedRequest, res : Response, next : 
         next();
 
     }catch(err){
-
+        res.status(500).json({ message : `Internal Server Error : ${err}` });
     }
 };
 
