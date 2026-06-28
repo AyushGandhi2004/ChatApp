@@ -5,6 +5,10 @@ import React from 'react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { useAppData } from '@/context/AppContext'
+import Loading from '@/components/Loading';
+import { redirect } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -12,6 +16,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const router = useRouter();
+    const { isAuth, loading:userLoading } = useAppData();
 
     const handleSubmit = async(e : React.FormEvent<HTMLElement>): Promise<void> => {
         e.preventDefault();
@@ -22,14 +27,18 @@ const LoginPage = () => {
                 email
             });
             // alert(data.data.message);
+            toast.success(data.data.message)
             router.push(`/verify?email=${email}`);
         }catch(err : any){
-            alert(err.response.data.message)
+            toast.error(err.response.data.message)
         }finally{
             setIsLoading(false);
         }
 
     }
+
+    if(userLoading) return <Loading/>;
+    if(isAuth) redirect("/chats");
 
   return (
     <div className='min-h-screen bg-gray-900 flex items-center justify-center p-4'>
